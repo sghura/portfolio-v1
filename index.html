@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabeer Ghura - Portfolio</title>
+    <style>
+        :root[data-theme="light"] {
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --card-bg: #f8f8f8;
+            --hover-shadow: rgba(0,0,0,0.1);
+            --accent-color: #7BA891;
+            --secondary-text: #666666;
+            --nav-bg: rgba(255, 255, 255, 0.95);
+        }
+
+        :root[data-theme="dark"] {
+            --bg-color: #1a1a1a;
+            --text-color: #ffffff;
+            --card-bg: #2d2d2d;
+            --hover-shadow: rgba(255,255,255,0.1);
+            --accent-color: #95C0AA;
+            --secondary-text: #cccccc;
+            --nav-bg: rgba(26, 26, 26, 0.95);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: var(--card-bg);
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px var(--hover-shadow);
+        }
+
+        
+        
+        nav {
+            padding: 2rem;
+            position: fixed;
+            width: 100%;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: flex-end;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--secondary-text);
+            max-width: 600px;
+            margin-bottom: 1rem;
+        }
+
+        .work {
+            padding: 5rem 10%;
+        }
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .work-item {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .work-item .expanded-content {
+            max-height: 0;
+            opacity: 0;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .work-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px var(--hover-shadow);
+        }
+
+        .work-item:hover .expanded-content {
+            max-height: 1000px;
+            opacity: 1;
+            margin-top: 1rem;
+        }
+
+        .work-item h3 {
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        .work-item .preview-content {
+            margin-bottom: 0.5rem;
+        }
+
+        .expanded-content ul {
+            margin-left: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .expanded-content li {
+            margin: 0.5rem 0;
+            color: var(--secondary-text);
+        }
+
+        .contact {
+            padding: 5rem 10%;
+            background: var(--card-bg);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--secondary-text);
+            border-radius: 5px;
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        button {
+            background: var(--accent-color);
+            color: var(--bg-color);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .section-title {
+            margin-bottom: 2rem;
+            color: var(--text-color);
+        }
+
+        .date {
+            color: var(--secondary-text);
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
+
+        .contact-info {
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            color: var(--secondary-text);
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+
+    <nav>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#education">Education</a>
+            <a href="#skills">Skills</a>
+            <a href="#work">Experience</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div>
+                <h1>Hello, I'm Sabeer
+                <iframe src="https://giphy.com/embed/5xRW2cUKfcyQg" width="100" height="100" style="border: none;" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+            </h1>
+                <p>Mathematical Studies student at University of Waterloo specializing in Combinatorics and Optimization, Computing, and Economics.</p>
+                <div class="contact-info">
+                    <p>📍 Waterloo, ON</p>
+                    <p>📧 sghura@uwaterloo.ca</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="work" id="education">
+        <h2 class="section-title">Education</h2>
+        <div class="work-item">
+            <h3>University of Waterloo</h3>
+            <div class="preview-content">
+                <p class="date">September 2019 - December 2024</p>
+                <p>Honours Bachelor of Mathematics</p>
+                <p>Major in Mathematical Studies</p>
+            </div>
+            <div class="expanded-content">
+                <p><strong>Minors:</strong></p>
+                <ul>
+                    <li>Combinatorics and Optimization</li>
+                    <li>Computing</li>
+                    <li>Economics</li>
+                </ul>
+                <p><strong>Awards:</strong></p>
+                <ul>
+                    <li>President's Scholarship</li>
+                    <li>Outstanding Student at York University's ABMP</li>
+                </ul>
+                <p><strong>Relevant Coursework:</strong></p>
+                <ul>
+                    <li>Software Engineering</li>
+                    <li>Cryptography</li>
+                    <li>Data Types and Structures</li>
+                    <li>Financial Math</li>
+                    <li>Models of Choice: Competitive Markets</li>
+                    <li>Equilibrium in Market Economies</li>
+                    <li>Biostatistics</li>
+                    <li>Operations Research</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="work" id="skills">
+        <h2 class="section-title">Skills</h2>
+        <div class="work-grid">
+            <div class="work-item">
+                <h3>Languages</h3>
+                <div class="preview-content">
+                    <p>Python, Java, R, SQL, and more</p>
+                </div>
+                <div class="expanded-content">
+                    <ul>
+                        <li>Python</li>
+                        <li>Java</li>
+                        <li>R</li>
+                        <li>SAS</li>
+                        <li>SQL</li>
+                        <li>HTML</li>
+                        <li>CSS</li>
+                        <li>Racket</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="work-item">
+                <h3>Software</h3>
+                <div class="preview-content">
+                    <p>JIRA, Git, Microsoft Office, and more</p>
+                </div>
+                <div class="expanded-content">
+                    <ul>
+                        <li>JIRA FileMaker Pro</li>
+                        <li>Microsoft Office/365 (MS Access)</li>
+                        <li>Git</li>
+                        <li>Linux</li>
+                        <li>Adobe Premiere Pro</li>
+                        <li>VideoPad</li>
+                        <li>Audacity</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="work" id="work">
+        <h2 class="section-title">Projects & Experience</h2>
+        <div class="work-grid">
+            <div class="work-item">
+                <h3>Electric-Vehicle Charging Station Network Enhancement</h3>
+                <div class="preview-content">
+                    <p class="date">Research Project</p>
+                    <p>Optimization in the Kitchener-Waterloo-Cambridge CMA</p>
+                </div>
+                <div class="expanded-content">
+                    <ul>
+                        <li>Conducted analyses using geographic data and existing population and EV data</li>
+                        <li>Used numerical modelling to optimize potential locations</li>
+                        <li>Increased Level 2 charger coverage from 14.57% to 96.14% within 0.50 km radius</li>
+                        <li>Improved Level 3 charger coverage from 1.78% to 85.40% within 0.75 km radius</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="work-item">
+                <h3>External Director, WUSA</h3>
+                <div class="preview-content">
+                    <p class="date">January 2023 - December 2024</p>
+                    <p>Leadership role in student organization</p>
+                </div>
+                <div class="expanded-content">
+                    <ul>
+                        <li>Fostered partnerships between university and regional organizations</li>
+                        <li>Facilitated outreach initiatives by inviting external organizations</li>
+                        <li>Represented services at community advocacy meetings</li>
+                        <li>Acted as liaison between university and community partners</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="work-item">
+                <h3>Service Coordinator, WUSA</h3>
+                <div class="preview-content">
+                    <p class="date">May 2022 - December 2022</p>
+                    <p>Managed team of 97 people</p>
+                </div>
+                <div class="expanded-content">
+                    <ul>
+                        <li>Provided supervision, training, and support for 10 executives and 87 volunteers</li>
+                        <li>Oversaw logistics, safety and general operations</li>
+                        <li>Managed events, finances, and communications</li>
+                        <li>Collaborated with WUSA marketing for effective promotion</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="work-item">
+                <h3>RBC Professional Experience Program</h3>
+                <div class="preview-content">
+                    <p class="date">May 2024 - June 2024</p>
+                    <p>Competitive Analysis Project</p>
+                </div>
+                <div class="expanded-content">
+                    <p>Money, Our Values & Banking Operations: A Competitive Analysis</p>
+                    <ul>
+                        <li>Conducted comprehensive SWOT/PEST analysis</li>
+                        <li>Developed problem statements with competitor/sector analysis</li>
+                        <li>Researched key industry trends</li>
+                        <li>Developed and critically assessed alternative strategies</li>
+                        <li>Presented final recommendations formally</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <h2 class="section-title">Get in Touch</h2>
+        <div class="contact-form">
+            <form>
+                <input type="text" placeholder="Name" required>
+                <input type="email" placeholder="Email" required>
+                <textarea placeholder="Message" rows="5" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', newTheme);
+        }
+    </script>
+</body>
+</html>
