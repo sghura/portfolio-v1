@@ -272,7 +272,52 @@
     <style>
         @media screen and (max-width: 768px) {
             nav {
+        .hamburger {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1002;
+            background: var(--card-bg);
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            box-shadow: 0 2px 5px var(--hover-shadow);
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
                 display: none;
+                flex-direction: column;
+                position: fixed;
+                top: 0;
+                left: -250px;
+                height: 100%;
+                width: 250px;
+                background: var(--card-bg);
+                padding: 2rem 1rem;
+                box-shadow: 2px 0 5px var(--hover-shadow);
+                z-index: 1001;
+                transition: left 0.3s ease;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: block;
             }
         }
     </style>
